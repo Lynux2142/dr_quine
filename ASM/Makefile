@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student      (__)  (__\_) \__/  (__) (____)        #
 #                                         ___   __                             #
 #    Created: 2019/03/28 15:01:38 b      / __) /  \                            #
-#    Updated: 2019/04/05 10:44:55 b     ( (_ \(  o )                           #
+#    Updated: 2019/04/05 11:09:52 b     ( (_ \(  o )                           #
 #                                        \___/ \__/                            #
 #                                                                              #
 # **************************************************************************** #
@@ -17,10 +17,12 @@
 
 OPE_SYS					= $(shell uname)
 NAME					= Colleen Grace Sully
-SRCS					= $(addsuffix .c, $(NAME))
-OBJS					= $(SRCS:.c=.o)
-TEST					= -Werror
-FLAGS					= -Wall -Wextra $(TEST) -g
+SRCS					= $(addsuffix .s, $(NAME))
+OBJS					= $(SRCS:.s=.o)
+INCLUDES				= -lc --dynamic-linker /lib64/ld-linux-x86-64.so.2
+FLAGS_GCC				= -no-pie
+FLAGS					= -D linux
+FLAGS_NASM				= -f elf64
 
 ##################
 ##   TARGETS    ##
@@ -28,19 +30,13 @@ FLAGS					= -Wall -Wextra $(TEST) -g
 
 .PHONY: all clean fclean re
 
-all: Colleen Grace Sully
+all: $(NAME)
 
-Colleen: Colleen.o
-	@gcc $(FLAGS) Colleen.o -o Colleen
+$(OBJS): %.o: %.s
+	@nasm $(FLAGS_NASM) $(FLAGS) $^ -o $@
 
-Grace: Grace.o
-	@gcc $(FLAGS) Grace.o -o Grace
-
-Sully: Sully.o
-	@gcc $(FLAGS) Sully.o -o Sully
-
-%.o: %.c
-	@gcc $(FLAGS) -c $^ -o $@
+$(NAME): %: %.o
+	@gcc $(FLAGS_GCC) $(FLAGS) $^ -o $@
 
 clean:
 	@/bin/rm -rf $(OBJS)
