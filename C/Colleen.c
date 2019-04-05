@@ -6,8 +6,8 @@
 
 void display()
 {
-	const char *s = "#include <stdio.h>%c%c%c*%c	ceci est un autre commentaire%c*%c%c%cvoid display()%c{%c	const char *s = %c%s%c;%c	printf(s, 10, 10, 47, 10, 10, 47, 10, 10, 10, 10, 34, s, 34, 10, 10, 10, 10, 10, 10, 47, 10, 10, 47, 10, 10, 10);%c}%c%cint main(void)%c{%c	%c*%c		ceci est un commentaire%c	*%c%c	display();%c}%c";
-	printf(s, 10, 10, 47, 10, 10, 47, 10, 10, 10, 10, 34, s, 34, 10, 10, 10, 10, 10, 10, 47, 10, 10, 47, 10, 10, 10);
+	const char *s = "#include <stdio.h>%2$c%2$c%3$c*%2$c	ceci est un autre commentaire%2$c*%3$c%2$c%2$cvoid display()%2$c{%2$c	const char *s = %4$c%1$s%4$c;%2$c	printf(s, s, 10, 47, 34);%2$c}%2$c%2$cint main(void)%2$c{%2$c	%3$c*%2$c		ceci est un commentaire%2$c	*%3$c%2$c	display();%2$c}%2$c";
+	printf(s, s, 10, 47, 34);
 }
 
 int main(void)
