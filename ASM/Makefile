@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student      (__)  (__\_) \__/  (__) (____)        #
 #                                         ___   __                             #
 #    Created: 2019/03/28 15:01:38 b      / __) /  \                            #
-#    Updated: 2019/04/05 12:11:51 b     ( (_ \(  o )                           #
+#    Updated: 2019/09/16 15:33:10 by lguiller         ###   ########.fr        #
 #                                        \___/ \__/                            #
 #                                                                              #
 # **************************************************************************** #
@@ -19,31 +19,31 @@ OPE_SYS					= $(shell uname)
 NAME					= Colleen Grace Sully
 SRCS					= $(addsuffix .s, $(NAME))
 OBJS					= $(SRCS:.s=.o)
-INCLUDES				= -lc --dynamic-linker /lib64/ld-linux-x86-64.so.2
-FLAGS_GCC				= -no-pie
-FLAGS					= -D linux
-FLAGS_NASM				= -f elf64
+FLAGS_GCC				=
+FLAGS_NASM				= -f macho64
+CC						= gcc
 
 ##################
 ##   TARGETS    ##
 ##################
 
 .PHONY: all clean fclean re
+.SILENT:
 
 all: $(NAME)
 
 $(OBJS): %.o: %.s
-	@nasm $(FLAGS_NASM) $(FLAGS) $^ -o $@
+	nasm $(FLAGS_NASM) $^ -o $@
 
 $(NAME): %: %.o
-	@gcc $(FLAGS_GCC) $(FLAGS) $^ -o $@
+	$(CC) $(FLAGS_GCC) $^ -o $@ 2>/dev/null
 
 clean:
-	@/bin/rm -rf $(OBJS)
+	$(RM) -r $(OBJS)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	$(RM) $(NAME)
 
 re:
-	@$(MAKE) -s fclean
-	@$(MAKE) -s
+	$(MAKE) -s fclean
+	$(MAKE) -s
