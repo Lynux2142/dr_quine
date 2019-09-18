@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/18 11:54:51 by lguiller          #+#    #+#              #
-#    Updated: 2019/09/18 11:55:02 by lguiller         ###   ########.fr        #
+#    Updated: 2019/09/18 12:08:21 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME					+= Grace
 NAME					+= Sully
 SRCS					= $(addsuffix .c, $(NAME))
 OBJS					= $(SRCS:.c=.o)
-FLAGS					= -Wall -Wextra -Werror
+FLAGS					= -Wall -Wextra -Werror -g
 CC						= gcc
 
 ##################
