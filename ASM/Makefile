@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student      (__)  (__\_) \__/  (__) (____)        #
 #                                         ___   __                             #
 #    Created: 2019/03/28 15:01:38 b      / __) /  \                            #
-#    Updated: 2019/09/17 15:04:48 by lguiller         ###   ########.fr        #
+#    Updated: 2019/09/18 10:56:40 by lguiller         ###   ########.fr        #
 #                                        \___/ \__/                            #
 #                                                                              #
 # **************************************************************************** #
@@ -16,10 +16,12 @@
 ##################
 
 OPE_SYS					= $(shell uname)
-NAME					= Colleen Grace Sully
+NAME					= Colleen
+NAME					+= Grace
+NAME					+= Sully
 SRCS					= $(addsuffix .s, $(NAME))
 OBJS					= $(SRCS:.s=.o)
-FLAGS_GCC				=
+FLAGS					= -Wall -Wextra -Werror
 FLAGS_NASM				= -f macho64
 CC						= gcc
 
@@ -32,11 +34,12 @@ CC						= gcc
 
 all: $(NAME)
 
+$(NAME): %: %.o
+	$(CC) $(FLAGS) $^ -o $@ 2>/dev/null
+	echo $@
+
 $(OBJS): %.o: %.s
 	nasm $(FLAGS_NASM) $^ -o $@
-
-$(NAME): %: %.o
-	$(CC) $(FLAGS_GCC) $^ -o $@ 2>/dev/null
 
 clean:
 	$(RM) -r $(OBJS)

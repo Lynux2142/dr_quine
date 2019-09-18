@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student      (__)  (__\_) \__/  (__) (____)        #
 #                                         ___   __                             #
 #    Created: 2019/03/28 15:01:38 b      / __) /  \                            #
-#    Updated: 2019/09/18 10:52:09 by lguiller         ###   ########.fr        #
+#    Updated: 2019/09/18 10:56:32 by lguiller         ###   ########.fr        #
 #                                        \___/ \__/                            #
 #                                                                              #
 # **************************************************************************** #
@@ -33,19 +33,11 @@ CC						= gcc
 
 all: $(NAME)
 
-Colleen: Colleen.o
+$(NAME): %: %.o
 	$(CC) $(FLAGS) $^ -o $@
 	echo $@
 
-Grace: Grace.o
-	$(CC) $(FLAGS) $^ -o $@
-	echo $@
-
-Sully: Sully.o
-	$(CC) $(FLAGS) $^ -o $@
-	echo $@
-
-%.o: %.c
+$(OBJS): %.o: %.c
 	$(CC) $(FLAGS) -c $^ -o $@
 
 clean:
