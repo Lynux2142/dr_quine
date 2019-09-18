@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student      (__)  (__\_) \__/  (__) (____)        #
 #                                         ___   __                             #
 #    Created: 2019/03/28 15:01:38 b      / __) /  \                            #
-#    Updated: 2019/04/05 10:44:55 b     ( (_ \(  o )                           #
+#    Updated: 2019/09/18 10:41:17 by lguiller         ###   ########.fr        #
 #                                        \___/ \__/                            #
 #                                                                              #
 # **************************************************************************** #
@@ -16,38 +16,41 @@
 ##################
 
 OPE_SYS					= $(shell uname)
-NAME					= Colleen Grace Sully
+NAME					= Colleen
+NAME					+= Grace
+NAME					+= Sully
 SRCS					= $(addsuffix .c, $(NAME))
 OBJS					= $(SRCS:.c=.o)
-TEST					= -Werror
-FLAGS					= -Wall -Wextra $(TEST) -g
+FLAGS					= -Wall -Wextra -Werror
+CC						= gcc
 
 ##################
 ##   TARGETS    ##
 ##################
 
 .PHONY: all clean fclean re
+.SILENT:
 
 all: Colleen Grace Sully
 
 Colleen: Colleen.o
-	@gcc $(FLAGS) Colleen.o -o Colleen
+	$(CC) $(FLAGS) Colleen.o -o Colleen
 
 Grace: Grace.o
-	@gcc $(FLAGS) Grace.o -o Grace
+	$(CC) $(FLAGS) Grace.o -o Grace
 
 Sully: Sully.o
-	@gcc $(FLAGS) Sully.o -o Sully
+	$(CC) $(FLAGS) Sully.o -o Sully
 
 %.o: %.c
-	@gcc $(FLAGS) -c $^ -o $@
+	$(CC) $(FLAGS) -c $^ -o $@
 
 clean:
-	@/bin/rm -rf $(OBJS)
+	$(RM) -r $(OBJS)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	$(RM) $(NAME)
 
 re:
-	@$(MAKE) -s fclean
-	@$(MAKE) -s
+	$(MAKE) -s fclean
+	$(MAKE) -s
