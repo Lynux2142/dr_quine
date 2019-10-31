@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/18 11:56:03 by lguiller          #+#    #+#              #
-#    Updated: 2019/09/19 10:37:15 by lguiller         ###   ########.fr        #
+#    Updated: 2019/10/31 11:14:48 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS					= $(addsuffix .s, $(NAME))
 OBJS					= $(SRCS:.s=.o)
 FLAGS					= -Wall -Wextra -Werror -arch x86_64
 FLAGS_NASM				= -f macho64
-CC						= gcc
+CC					= gcc
 
 ##################
 ##   TARGETS    ##
